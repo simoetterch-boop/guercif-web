@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="اكتشف تاريخ وثقافة مدينة جرسيف - بوابة المغرب الشرقي">
+    <title>جرسيف - تاريخ وتراث</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Custom Styles -->
+    <style>
+        :root {
+            --deep-forest-green: #1b4332;
+            --forest-green: #2d5016;
+            --light-forest: #40916c;
+            --gold: #d4af37;
+            --gold-light: #f4d03f;
+            --gold-bright: #f9d71c;
+            --dark-bg: #0a0f0d;
+            --darker-bg: #121917;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0f0d 0%, #121917 50%, #0a0f0d 100%);
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(27, 67, 50, 0.2);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+        
+        .glass-strong {
+            background: rgba(27, 67, 50, 0.4);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        /* 3D Shadow Effects */
+        .shadow-3d {
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(212, 175, 55, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .shadow-3d-hover {
+            box-shadow: 
+                0 30px 80px rgba(212, 175, 55, 0.3),
+                0 0 0 1px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Floating Animation */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(2deg); }
+        }
+        
+        .float {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .float-delay {
+            animation: float 6s ease-in-out infinite;
+            animation-delay: 2s;
+        }
+        
+        /* Parallax Background */
+        .parallax-bg {
+            background-image: linear-gradient(rgba(10, 15, 13, 0.7), rgba(18, 25, 23, 0.7)),
+                              url('https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1920&q=80');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Timeline Styles */
+        .timeline-line {
+            background: linear-gradient(180deg, var(--gold) 0%, var(--light-forest) 100%);
+            width: 4px;
+            position: absolute;
+        }
+        
+        .timeline-dot {
+            background: radial-gradient(circle, var(--gold-light) 0%, var(--gold) 100%);
+            box-shadow: 0 0 20px var(--gold), 0 0 40px var(--gold-light);
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, var(--gold-light) 0%, var(--gold) 50%, var(--light-forest) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--dark-bg);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--gold) 0%, var(--light-forest) 100%);
+            border-radius: 5px;
+        }
+        
+        /* Card Hover Effect */
+        .card-3d {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        .card-3d:hover {
+            transform: translateY(-10px) scale(1.02);
+        }
+        
+        /* Gallery Grid */
+        .gallery-item {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .gallery-item:hover {
+            transform: scale(1.05) rotate(1deg);
+            z-index: 10;
+        }
+        
+        .gallery-item img {
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.2);
+        }
+        
+        /* Floating Ko-fi Button */
+        .kofi-floating-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 
+                0 10px 30px rgba(212, 175, 55, 0.4),
+                0 0 0 4px rgba(212, 175, 55, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: kofi-pulse 2s ease-in-out infinite;
+        }
+        
+        .kofi-floating-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 
+                0 15px 40px rgba(212, 175, 55, 0.6),
+                0 0 0 6px rgba(212, 175, 55, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.4);
+        }
+        
+        @keyframes kofi-pulse {
+            0%, 100% {
+                box-shadow: 
+                    0 10px 30px rgba(212, 175, 55, 0.4),
+                    0 0 0 4px rgba(212, 175, 55, 0.2),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+            50% {
+                box-shadow: 
+                    0 15px 40px rgba(212, 175, 55, 0.6),
+                    0 0 0 8px rgba(212, 175, 55, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            }
+        }
+        
+        .kofi-floating-btn i {
+            color: #0a0f0d;
+            width: 28px;
+            height: 28px;
+        }
+        
+        @media (max-width: 768px) {
+            .kofi-floating-btn {
+                width: 55px;
+                height: 55px;
+                bottom: 20px;
+                left: 20px;
+            }
+            
+            .kofi-floating-btn i {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-strong shadow-3d">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="text-2xl font-bold gradient-text">جرسيف</div>
+                <div class="hidden md:flex space-x-8 space-x-reverse">
+                    <a href="#home" class="hover:text-yellow-400 transition-colors">الرئيسية</a>
+                    <a href="#history" class="hover:text-yellow-400 transition-colors">التاريخ</a>
+                    <a href="#geography" class="hover:text-yellow-400 transition-colors">الجغرافيا</a>
+                    <a href="#culture" class="hover:text-yellow-400 transition-colors">الثقافة</a>
+                    <a href="#gallery" class="hover:text-yellow-400 transition-colors">المعرض</a>
+                </div>
+                <button class="md:hidden" id="mobile-menu-btn">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#1b4332] bg-opacity-95 backdrop-blur-lg">
+            <div class="container mx-auto px-4 py-4 flex flex-col space-y-4">
+                <a href="#home" class="hover:text-yellow-400 transition-colors">الرئيسية</a>
+                <a href="#history" class="hover:text-yellow-400 transition-colors">التاريخ</a>
+                <a href="#geography" class="hover:text-yellow-400 transition-colors">الجغرافيا</a>
+                <a href="#culture" class="hover:text-yellow-400 transition-colors">الثقافة</a>
+                <a href="#gallery" class="hover:text-yellow-400 transition-colors">المعرض</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="parallax-bg min-h-screen flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#0a0f0d]/50 to-[#0a0f0d]"></div>
+        <div class="container mx-auto px-4 py-20 relative z-10 text-center" data-aos="fade-up">
+            <div class="float">
+                <h1 class="text-7xl md:text-9xl font-bold mb-6 gradient-text drop-shadow-2xl">
+                    جرسيف
+                </h1>
+            </div>
+            <p class="text-xl md:text-3xl mb-8 text-gray-200 font-light" data-aos="fade-up" data-aos-delay="200">
+                بوابة المغرب الشرقي · أرض الزيتون والتاريخ
+            </p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center" data-aos="fade-up" data-aos-delay="400">
+                <a href="#history" class="px-8 py-4 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a0f0d] font-bold rounded-lg shadow-3d hover:shadow-3d-hover transition-all transform hover:scale-105">
+                    اكتشف التاريخ
+                </a>
+                <a href="#culture" class="px-8 py-4 glass text-white font-bold rounded-lg shadow-3d hover:shadow-3d-hover transition-all transform hover:scale-105 border border-[#d4af37]/30">
+                    التراث الثقافي
+                </a>
+                <a href="https://ko-fi.com/mohamedterch" target="_blank" rel="noopener noreferrer" class="px-8 py-4 bg-gradient-to-r from-[#d4af37] to-[#f4d03f] text-[#0a0f0d] font-bold rounded-lg shadow-3d hover:shadow-3d-hover transition-all transform hover:scale-105 flex items-center justify-center gap-2">
+                    <i data-lucide="heart" class="w-5 h-5"></i>
+                    ادعمني
+                </a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i data-lucide="chevron-down" class="w-8 h-8 text-[#d4af37]"></i>
+        </div>
+    </section>
+
+    <!-- History Timeline Section -->
+    <section id="history" class="py-20 relative bg-[#0a0f0d]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-16 gradient-text" data-aos="fade-down">
+                التاريخ عبر العصور
+            </h2>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Timeline Line -->
+                <div class="hidden md:block timeline-line h-full absolute right-1/2 transform translate-x-1/2" style="height: 100%;"></div>
+                
+                <!-- Timeline Items -->
+                <div class="space-y-12 md:space-y-20">
+                    <!-- Item 1 -->
+                    <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                        <div class="w-full md:w-1/2 md:pr-8 md:text-left text-right">
+                            <div class="glass-strong p-6 rounded-lg shadow-3d card-3d relative">
+                                <div class="hidden md:block absolute -right-4 top-6 w-4 h-4 rounded-full timeline-dot"></div>
+                                <div class="md:hidden absolute -left-4 top-6 w-4 h-4 rounded-full timeline-dot"></div>
+                                <div class="flex items-center mb-4 justify-end md:justify-start">
+                                    <h3 class="text-2xl font-bold text-[#f4d03f]">العصور القديمة</h3>
+                                </div>
+                                <p class="text-gray-300">منذ آلاف السنين، كانت جرسيف نقطة عبور مهمة بين السهول والجبال، سكنتها قبائل أمازيغية عريقة.</p>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-1/2"></div>
+                    </div>
+                    
+                    <!-- Item 2 -->
+                    <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-left">
+                        <div class="hidden md:block w-1/2"></div>
+                        <div class="w-full md:w-1/2 md:pl-8 text-right">
+                            <div class="glass-strong p-6 rounded-lg shadow-3d card-3d relative">
+                                <div class="hidden md:block absolute -left-4 top-6 w-4 h-4 rounded-full timeline-dot"></div>
+                                <div class="md:hidden absolute -right-4 top-6 w-4 h-4 rounded-full timeline-dot"></div>
+                                <div class="flex items-center justify-end mb-4">
+                                    <h3 class="text-2xl font-bold text-[#f4d03f]">الفترة الإسلامية</h3>
+                                </div>
+                                <p class="text-gray-300">مع الفتح الإسلامي، ازدهرت المنطقة وأصبحت مركزاً تجارياً مهماً على طريق القوافل.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Item 3 -->
+                    <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-right">
+                        <div class="w-full md:w-1/2 md:pr-8 md:text-left text-right">
+                            <div class="glass-strong p-6 rounded-lg shadow-3d card-3d relative">
+                                <div class="hidden md:block absolute -right-4 top-6 w-4 h-4 rounded-full timeline-dot"></div>
+                                <div class="md:hidden absolute -left-4 top-6 w-4 h-4 rounded-full timeline-dot"></div>
+                                <div class="flex items-center mb-4 justify-end md:justify-start">
+                                    <h3 class="text-2xl font-bold text-[#f4d03f]">العصر الحديث</h3>
+                                </div>
+                                <p class="text-gray-300">تطورت جرسيف لتصبح مدينة عصرية تحافظ على تراثها العريق وتنفتح على المستقبل.</p>
+                            </div>
+                        </div>
+                        <div class="hidden md:block w-1/2"></div>
+                    </div>
+                    
+                    <!-- Item 4 - Present -->
+                    <div class="relative flex flex-col md:flex-row items-center" data-aos="fade-left">
+                        <div class="hidden md:block w-1/2"></div>
+                        <div class="w-full md:w-1/2 md:pl-8 text-right">
+                            <div class="glass-strong p-6 rounded-lg shadow-3d card-3d border-2 border-[#d4af37] relative">
+                                <div class="hidden md:block absolute -left-4 top-6 w-6 h-6 rounded-full timeline-dot"></div>
+                                <div class="md:hidden absolute -right-4 top-6 w-6 h-6 rounded-full timeline-dot"></div>
+                                <div class="flex items-center justify-end mb-4">
+                                    <h3 class="text-2xl font-bold text-[#f4d03f]">اليوم</h3>
+                                </div>
+                                <p class="text-gray-300">جرسيف اليوم: مدينة مزدهرة تجمع بين الأصالة والحداثة، محافظة على هويتها الثقافية الفريدة.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Geography & Nature Section -->
+    <section id="geography" class="py-20 bg-gradient-to-b from-[#0a0f0d] to-[#121917]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-4 gradient-text" data-aos="fade-down">
+                الجغرافيا والطبيعة
+            </h2>
+            <p class="text-center text-gray-400 mb-16 text-xl" data-aos="fade-up">
+                أنهار وعيون تغذي أرض الزيتون
+            </p>
+            
+            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                <!-- Moulouya River Card -->
+                <div class="glass-strong rounded-2xl p-8 shadow-3d card-3d float" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-blue-500 to-blue-700 flex items-center justify-center shadow-lg">
+                            <i data-lucide="droplets" class="w-10 h-10 text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-center mb-4 text-[#f4d03f]">نهر ملوية</h3>
+                    <p class="text-gray-300 text-center leading-relaxed mb-6">
+                        نهر ملوية، شريان الحياة في المنطقة الشرقية، يجري عبر جرسيف حاملاً معه الحياة والخصوبة لسهولها الخضراء. يعد من أطول الأنهار في المغرب وأكثرها أهمية.
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="px-4 py-2 bg-[#40916c]/30 rounded-lg text-[#40916c] text-sm font-semibold">
+                            الطول: 600+ كم
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Melloulou River Card -->
+                <div class="glass-strong rounded-2xl p-8 shadow-3d card-3d float-delay" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="flex items-center justify-center mb-6">
+                        <div class="w-20 h-20 rounded-full bg-gradient-to-br from-green-500 to-green-700 flex items-center justify-center shadow-lg">
+                            <i data-lucide="waves" class="w-10 h-10 text-white"></i>
+                        </div>
+                    </div>
+                    <h3 class="text-3xl font-bold text-center mb-4 text-[#f4d03f]">نهر ملولوة</h3>
+                    <p class="text-gray-300 text-center leading-relaxed mb-6">
+                        نهر ملولوة، رافد مهم آخر يضفي جمالاً على طبيعة جرسيف. تجري مياهه العذبة عبر المنطقة، ساهمة في ثراء التنوع البيولوجي والزراعي.
+                    </p>
+                    <div class="flex justify-center">
+                        <div class="px-4 py-2 bg-[#40916c]/30 rounded-lg text-[#40916c] text-sm font-semibold">
+                            رافد مهم
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Olive Trees Feature -->
+            <div class="mt-16 max-w-4xl mx-auto" data-aos="fade-up" data-aos-delay="500">
+                <div class="glass-strong rounded-2xl p-8 shadow-3d">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-1">
+                            <h3 class="text-3xl font-bold mb-4 text-[#f4d03f] flex items-center gap-3">
+                                <i data-lucide="trees" class="w-8 h-8"></i>
+                                أشجار الزيتون
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed">
+                                تغطي أشجار الزيتون المباركة أراضي جرسيف، لتمنحها هوية خاصة. زيت الزيتون الجرسيفي معروف بجودته الفائقة، وهو مصدر فخر وفخر لأهل المنطقة.
+                            </p>
+                        </div>
+                        <div class="w-full md:w-64 h-64 rounded-xl overflow-hidden shadow-3d">
+                            <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=800&q=80" 
+                                 alt="أشجار الزيتون" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Identity Section -->
+    <section id="culture" class="py-20 bg-[#0a0f0d]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-4 gradient-text" data-aos="fade-down">
+                الهوية الثقافية
+            </h2>
+            <p class="text-center text-gray-400 mb-16 text-xl" data-aos="fade-up">
+                تراث أصيل وثقافة حية
+            </p>
+            
+            <!-- El Ghiyata Section -->
+            <div class="max-w-6xl mx-auto mb-20" data-aos="fade-up">
+                <div class="glass-strong rounded-2xl p-8 md:p-12 shadow-3d">
+                    <div class="grid md:grid-cols-2 gap-12 items-center">
+                        <div>
+                            <h3 class="text-4xl font-bold mb-6 text-[#f4d03f] flex items-center gap-4">
+                                <i data-lucide="music" class="w-10 h-10"></i>
+                                الغياطة
+                            </h3>
+                            <p class="text-gray-300 leading-relaxed mb-6 text-lg">
+                                الغياطة هي أحد أهم الفنون الموسيقية التقليدية في جرسيف والمنطقة الشرقية. تعبير فني أصيل يجمع بين الإيقاع والموسيقى والحركة، يحافظ عليه أهل جرسيف كجزء من هويتهم الثقافية.
+                            </p>
+                            <p class="text-gray-400 leading-relaxed mb-6">
+                                تتميز الغياطة بأدواتها الموسيقية التقليدية وإيقاعاتها المميزة التي تنقل القصص والأحداث التاريخية بطريقة فنية راقية.
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <span class="px-4 py-2 bg-[#d4af37]/20 text-[#f4d03f] rounded-full text-sm">موسيقى تقليدية</span>
+                                <span class="px-4 py-2 bg-[#d4af37]/20 text-[#f4d03f] rounded-full text-sm">تراث أصيل</span>
+                                <span class="px-4 py-2 bg-[#d4af37]/20 text-[#f4d03f] rounded-full text-sm">هوية ثقافية</span>
+                            </div>
+                        </div>
+                        <div class="w-full h-80 rounded-xl overflow-hidden shadow-3d">
+                            <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=800&q=80" 
+                                 alt="الغياطة" 
+                                 class="w-full h-full object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Traditions Grid -->
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="glass rounded-xl p-6 shadow-3d card-3d" data-aos="flip-left" data-aos-delay="100">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center mb-4 mx-auto">
+                        <i data-lucide="users" class="w-8 h-8 text-[#0a0f0d]"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3 text-[#f4d03f]">التقاليد الاجتماعية</h4>
+                    <p class="text-gray-400 text-center text-sm">
+                        عادات وتقاليد متوارثة تعكس قيم الكرم والضيافة والترابط الأسري
+                    </p>
+                </div>
+                
+                <div class="glass rounded-xl p-6 shadow-3d card-3d" data-aos="flip-left" data-aos-delay="300">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#40916c] to-[#52b788] flex items-center justify-center mb-4 mx-auto">
+                        <i data-lucide="utensils" class="w-8 h-8 text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3 text-[#f4d03f]">المطبخ المحلي</h4>
+                    <p class="text-gray-400 text-center text-sm">
+                        أطباق تقليدية لذيذة تعتمد على المنتجات المحلية وزيت الزيتون الأصيل
+                    </p>
+                </div>
+                
+                <div class="glass rounded-xl p-6 shadow-3d card-3d" data-aos="flip-left" data-aos-delay="500">
+                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-[#d4af37] to-[#f4d03f] flex items-center justify-center mb-4 mx-auto">
+                        <i data-lucide="heart" class="w-8 h-8 text-[#0a0f0d]"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-center mb-3 text-[#f4d03f]">الترابط المجتمعي</h4>
+                    <p class="text-gray-400 text-center text-sm">
+                        روابط قوية بين السكان والمحافظة على التراث الجماعي المشترك
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gradient-to-b from-[#121917] to-[#0a0f0d]">
+        <div class="container mx-auto px-4">
+            <h2 class="text-5xl font-bold text-center mb-4 gradient-text" data-aos="fade-down">
+                معرض الصور
+            </h2>
+            <p class="text-center text-gray-400 mb-16 text-xl" data-aos="fade-up">
+                لمحات من جمال جرسيف
+            </p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+                <!-- Gallery Item 1 -->
+                <div class="gallery-item glass rounded-xl overflow-hidden shadow-3d" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="aspect-square">
+                        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=600&q=80" 
+                             alt="منظر طبيعي" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-[#1b4332]/80 backdrop-blur-sm">
+                        <h4 class="text-[#f4d03f] font-semibold">المناظر الطبيعية</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 2 -->
+                <div class="gallery-item glass rounded-xl overflow-hidden shadow-3d" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="aspect-square">
+                        <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?w=600&q=80" 
+                             alt="الزيتون" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-[#1b4332]/80 backdrop-blur-sm">
+                        <h4 class="text-[#f4d03f] font-semibold">بساتين الزيتون</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 3 -->
+                <div class="gallery-item glass rounded-xl overflow-hidden shadow-3d" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="aspect-square">
+                        <img src="https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=600&q=80" 
+                             alt="التراث" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-[#1b4332]/80 backdrop-blur-sm">
+                        <h4 class="text-[#f4d03f] font-semibold">التراث الثقافي</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 4 -->
+                <div class="gallery-item glass rounded-xl overflow-hidden shadow-3d" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="aspect-square">
+                        <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=600&q=80" 
+                             alt="الطبيعة" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-[#1b4332]/80 backdrop-blur-sm">
+                        <h4 class="text-[#f4d03f] font-semibold">الطبيعة الخلابة</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 5 -->
+                <div class="gallery-item glass rounded-xl overflow-hidden shadow-3d" data-aos="zoom-in" data-aos-delay="500">
+                    <div class="aspect-square">
+                        <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=600&q=80" 
+                             alt="الجبال" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-[#1b4332]/80 backdrop-blur-sm">
+                        <h4 class="text-[#f4d03f] font-semibold">الجبال والوديان</h4>
+                    </div>
+                </div>
+                
+                <!-- Gallery Item 6 -->
+                <div class="gallery-item glass rounded-xl overflow-hidden shadow-3d" data-aos="zoom-in" data-aos-delay="600">
+                    <div class="aspect-square">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" 
+                             alt="المياه" 
+                             class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-4 bg-[#1b4332]/80 backdrop-blur-sm">
+                        <h4 class="text-[#f4d03f] font-semibold">الأنهار والينابيع</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#0a0f0d] border-t border-[#1b4332]/50 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div data-aos="fade-up">
+                    <h4 class="text-2xl font-bold mb-4 gradient-text">جرسيف</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        بوابة المغرب الشرقي، مدينة تجمع بين الأصالة والحداثة، تحافظ على تراثها العريق وتنفتح على المستقبل.
+                    </p>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="text-xl font-bold mb-4 text-[#f4d03f]">روابط سريعة</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-[#f4d03f] transition-colors text-sm">الرئيسية</a></li>
+                        <li><a href="#history" class="text-gray-400 hover:text-[#f4d03f] transition-colors text-sm">التاريخ</a></li>
+                        <li><a href="#geography" class="text-gray-400 hover:text-[#f4d03f] transition-colors text-sm">الجغرافيا</a></li>
+                        <li><a href="#culture" class="text-gray-400 hover:text-[#f4d03f] transition-colors text-sm">الثقافة</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-[#f4d03f] transition-colors text-sm">المعرض</a></li>
+                    </ul>
+                </div>
+                
+                <div data-aos="fade-up" data-aos-delay="400">
+                    <h4 class="text-xl font-bold mb-4 text-[#f4d03f]">معلومات التواصل</h4>
+                    <div class="space-y-3 text-gray-400 text-sm">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-[#f4d03f]"></i>
+                            <span>جرسيف، المغرب</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 text-[#f4d03f]"></i>
+                            <a href="mailto:simoetterch@gmail.com" class="text-gray-400 hover:text-[#f4d03f] transition-colors">simoetterch@gmail.com</a>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-4 h-4 text-[#f4d03f]"></i>
+                            <a href="tel:0612509077" class="text-gray-400 hover:text-[#f4d03f] transition-colors">0612509077</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-[#1b4332]/50 pt-8 text-center">
+                <p class="text-gray-500 text-sm">
+                    &copy; 2024 جرسيف - تاريخ وتراث. جميع الحقوق محفوظة.
+                </p>
+                <p class="text-gray-600 text-xs mt-2">
+                    صمم بحب للتعريف بتراث هذه المدينة العريقة
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Ko-fi Button -->
+    <a href="https://ko-fi.com/mohamedterch" target="_blank" rel="noopener noreferrer" class="kofi-floating-btn" title="ادعمني على Ko-fi" aria-label="Support me on Ko-fi">
+        <i data-lucide="coffee" class="w-7 h-7"></i>
+    </a>
+
+    <!-- Initialize Scripts -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            offset: 100
+        });
+        
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                if (icon) {
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    icon.setAttribute('data-lucide', isHidden ? 'menu' : 'x');
+                    lucide.createIcons();
+                }
+            });
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Parallax effect on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.parallax-bg');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.5}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
